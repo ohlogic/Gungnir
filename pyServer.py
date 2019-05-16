@@ -24,7 +24,7 @@ try:
     from http.server import BaseHTTPRequestHandler, HTTPServer
     from socketserver import ThreadingMixIn
 except ImportError:
-    # Fall back to Python 2's urllib2
+    # Fall back to Python 2
     from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
     from SocketServer import ThreadingMixIn
 
