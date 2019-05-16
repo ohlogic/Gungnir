@@ -40,7 +40,7 @@ import ssl
 # shell execute PHP
 def PHP(code):
 	p = Popen(['php'], stdout=PIPE, stdin=PIPE, stderr=STDOUT)	#note: example set a 4th arg,  close_fds=True
-	o = p.communicate(code.encode())[0]	# read output
+	o = p.communicate(code)[0]	# read output
 	try:
 		os.kill(p.pid, signal.SIGTERM)	# kill process
 	except:
@@ -50,7 +50,7 @@ def PHP(code):
 # shell execute python3
 def PYTHON(code):
     p = Popen(['python3'], stdout=PIPE, stdin=PIPE, stderr=STDOUT)	#note: example set a 4th arg,  close_fds=True
-    o = p.communicate(code.encode())[0]	# read output
+    o = p.communicate(code)[0]	# read output
     try:
         os.kill(p.pid, signal.SIGTERM)	# kill process
     except:
@@ -90,11 +90,11 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 
                 if self.path.endswith(".php"):        
-                    self.wfile.write(PHP(f.read()))
+                    self.wfile.write(PHP(f.read().encode()))
                 if self.path.endswith(".py"):        
-                    self.wfile.write(PYTHON(f.read()))               
+                    self.wfile.write(PYTHON(f.read().encode()))               
                 else:
-                    self.wfile.write(f.read())
+                    self.wfile.write(f.read().encode())
                     
                 f.close()
             return
