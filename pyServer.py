@@ -39,13 +39,13 @@ import ssl
 
 # shell execute PHP
 def PHP(code):
-	p = Popen(['php'], stdout=PIPE, stdin=PIPE, stderr=STDOUT)	#note: example set a 4th arg,  close_fds=True
-	o = p.communicate(code)[0]	# read output
-	try:
-		os.kill(p.pid, signal.SIGTERM)	# kill process
-	except:
-		pass
-	return o
+    p = Popen(['php'], stdout=PIPE, stdin=PIPE, stderr=STDOUT)	#note: example set a 4th arg,  close_fds=True
+    o = p.communicate(code)[0]	# read output
+    try:
+        os.kill(p.pid, signal.SIGTERM)	# kill process
+    except:
+        pass
+    return o
 
 # shell execute python3
 def PYTHON(code):
