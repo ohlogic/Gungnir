@@ -81,21 +81,33 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
             if self.path.endswith(".php") or self.path.endswith(".py"):
                 mimetype='text/html'
                 sendReply = True
-            
+            if self.path.endswith(".jpg"):
+                mimetype='image/jpg'
+                sendReply = True
+            if self.path.endswith(".gif"):
+                mimetype='image/gif'
+                sendReply = True
+            if self.path.endswith(".js"):
+                mimetype='application/javascript'
+                sendReply = True
+            if self.path.endswith(".css"):
+                mimetype='text/css'
+                sendReply = True
+                
             if sendReply == True:
                 #Open the dynamic, static file requested and send it
-                f = open("." + self.path) 
+                f = open("." + self.path, 'rb') 
                 self.send_response(200)
                 self.send_header('Content-type',mimetype)
                 self.end_headers()
                 
-                if self.path.endswith(".php"):        
-                    self.wfile.write(PHP(f.read().encode()))
-                if self.path.endswith(".py"):        
-                    self.wfile.write(PYTHON(f.read().encode()))               
+                if self.path.endswith(".php"):
+                    self.wfile.write(PHP(f.read()))
+                elif self.path.endswith(".py"):
+                    self.wfile.write(PYTHON(f.read()))
                 else:
-                    self.wfile.write(f.read().encode())
-                    
+                    self.wfile.write(f.read())
+                
                 f.close()
             return
                 
