@@ -16,3 +16,6 @@ to install php command line.
 
 
 To-do: To write example code to deal with a post request.
+
+
+Works with Python 2, intended and developed for Python 3.
